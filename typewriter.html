@@ -1,27 +1,55 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
     <title>Typewriter</title>
-    <link href="https://fonts.googleapis.com/css?family=Special+Elite" rel="stylesheet">
-    
-    <style> 
-        #typewriter {
-            font-family: 'Special Elite', cursive;        
-        }
+    <link
+      href="https://fonts.googleapis.com/css?family=Special+Elite"
+      rel="stylesheet"
+    />
+
+    <style>
+      #typewriter {
+        font-family: "Special Elite", cursive;
+        color: black;
+      }
     </style>
-</head>
-<body>
+  </head>
+  <body>
     <h1 id="typewriter">This text is written one character at a time</h1>
 
     <div id="sounds">
-        <audio id="typekey1" src="typekey1.mp3"></audio>
-        <audio id="typekey2" src="typekey2.mp3"></audio>
-        <audio id="typespace" src="typespace.mp3"></audio>
+      <audio id="typekey1" src="typekey1.mp3"></audio>
+      <audio id="typespace" src="typespace.mp3"></audio>
     </div>
 
-    <script src="typewriter.js"></script>
-</body>
+    <script>
+      "use strict";
+
+      window.addEventListener("DOMContentLoaded", init);
+      let text = document.querySelector("#typewriter").textContent;
+      let counter = 0;
+      let speed = 250;
+      let sound = new Audio("typekey1.mp3");
+
+      function init() {
+        document.querySelector("#typewriter").textContent = " ";
+        loop();
+      }
+
+      function loop() {
+        if (counter < text.length) {
+          sound.play();
+          document.querySelector("#typewriter").textContent += text.charAt(
+            counter
+          );
+
+          counter++;
+          setTimeout(loop, speed);
+        }
+      }
+    </script>
+  </body>
 </html>
